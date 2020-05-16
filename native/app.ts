@@ -30,7 +30,8 @@ for await (const req of s) {
       if (typeof val === 'string') {
         console.log('get field:', { key, val });
       } else if (typeof val === 'object') {
-        console.log('get file:', key);
+        console.log('get file:', key, val);
+        // await Deno.writeFile(`./test/${val.filename}`, val.content!);
         await Deno.writeFile(`./test/${val.filename}`, val.content as Uint8Array);
         // const file = form.file(key);
         // if (file && file.content) {
