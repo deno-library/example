@@ -1,5 +1,5 @@
-import { 
-  Application 
+import {
+  Application,
 } from "https://deno.land/x/oak/mod.ts";
 import {
   xResponseTime,
@@ -10,12 +10,12 @@ import {
   bold,
   yellow,
 } from "https://deno.land/std@0.50.0/fmt/colors.ts";
-import router from "./src/router.ts"
+import router from "./src/router.ts";
 
 const app = new Application();
 
-app.addEventListener("error", e => {
-  console.log('addEventListener', e.error);
+app.addEventListener("error", (e) => {
+  console.log("addEventListener", e.error);
 });
 
 app.use(logger);
@@ -25,5 +25,7 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 const options = { hostname: "127.0.0.1", port: 8000 };
-console.log(bold("Start listening on ") + yellow(`${options.hostname}:${options.port}`));
-await app.listen(options,);
+console.log(
+  bold("Start listening on ") + yellow(`${options.hostname}:${options.port}`),
+);
+await app.listen(options);

@@ -2,7 +2,7 @@ import {
   Context,
   isHttpError,
   Status,
-  STATUS_TEXT
+  STATUS_TEXT,
 } from "https://deno.land/x/oak/mod.ts";
 import {
   green,
@@ -22,7 +22,7 @@ export async function errorHandler(ctx: Context, next: () => Promise<void>) {
   try {
     await next();
   } catch (err) {
-    console.log('errorHandler', err);
+    console.log("errorHandler", err);
     // will be caught by the application
     // const status = isHttpError(err) ? err.status : 500;
     // ctx.throw(status, err.expose ? err.message : Status.InternalServerError)

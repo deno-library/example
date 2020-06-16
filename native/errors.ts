@@ -1,4 +1,3 @@
-
 export class HttpError extends Error {
   expose = false;
   status = 500;

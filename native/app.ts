@@ -10,8 +10,13 @@ console.log("http://localhost:8000/");
 for await (const req of s) {
   try {
     console.log(req.method, req.url);
-    if (req.method !== 'POST') {
-      req.respond({ body: "use post method and contentType multipart/form-data to upload a file" });
+    if (req.method !== "POST") {
+      req.respond(
+        {
+          body:
+            "use post method and contentType multipart/form-data to upload a file",
+        },
+      );
       continue;
     }
     const contentType = req.headers.get("content-type");
@@ -27,12 +32,15 @@ for await (const req of s) {
     const form = await mr.readForm();
     // console.log(form);
     for (let [key, val] of form.entries()) {
-      if (typeof val === 'string') {
-        console.log('get field:', { key, val });
-      } else if (typeof val === 'object') {
-        console.log('get file:', key, val);
+      if (typeof val === "string") {
+        console.log("get field:", { key, val });
+      } else if (typeof val === "object") {
+        console.log("get file:", key, val);
         // await Deno.writeFile(`./test/${val.filename}`, val.content!);
-        await Deno.writeFile(`./test/${val.filename}`, val.content as Uint8Array);
+        await Deno.writeFile(
+          `./test/${val.filename}`,
+          val.content as Uint8Array,
+        );
         // const file = form.file(key);
         // if (file && file.content) {
         //   await Deno.writeFile(`./test/${file.filename}`, file.content);
@@ -43,7 +51,7 @@ for await (const req of s) {
   } catch (err) {
     req.respond({
       status: err instanceof HttpError ? err.status : 500,
-      body: err.message
+      body: err.message,
     });
   }
 }
